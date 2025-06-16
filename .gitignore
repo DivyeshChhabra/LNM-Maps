@@ -26,3 +26,10 @@ GAT
 Demo.mp4
 LNM Coordinates
 LNM Roads
+
+# local env files
+map-env/
+lnm-maps/.env
+
+# Python cache files
+__pycache__/
