@@ -33,3 +33,6 @@ lnm-maps/.env
 
 # Python cache files
 __pycache__/
+
+# Data
+map-backup/

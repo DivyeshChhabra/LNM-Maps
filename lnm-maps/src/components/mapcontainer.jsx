@@ -5,7 +5,7 @@ import Map, { GeolocateControl, Layer, Marker, Source } from 'react-map-gl';
 
 import Form from './common/form';
 
-import marker from '../images/marker.png'
+import marker from '../images/marker2.png'
 
 import coordinates from '../data/lnmCoordinates.json';
 
@@ -87,7 +87,7 @@ class MapComponent extends Form {
                                             "line-cap": "round"
                                         }}
                                         paint={{
-                                            "line-color": "rgba(3, 170, 238, 0.5)",
+                                            "line-color": "rgba(3, 170, 238, 1)",
                                             "line-width": 5
                                         }} />
                                 </Source>}
@@ -102,14 +102,14 @@ class MapComponent extends Form {
                                 <Marker
                                     longitude={coordinates[source]['longitude']}
                                     latitude={coordinates[source]['latitude']}>
-                                    <img src={marker} style={{ width: '25px', height: '25px' }} />
+                                    <img src={marker} style={{ width: '35px', height: '40px' }} />
                                 </Marker>}
 
                             {coordinates[destination] &&
                                 <Marker
                                     longitude={coordinates[destination]['longitude']}
                                     latitude={coordinates[destination]['latitude']}>
-                                    <img src={marker} style={{ width: '25px', height: '25px' }} />
+                                    <img src={marker} style={{ width: '35px', height: '40px' }} />
                                 </Marker>}
 
                         </Map >
