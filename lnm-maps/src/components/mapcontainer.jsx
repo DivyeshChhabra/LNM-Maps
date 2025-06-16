@@ -14,6 +14,8 @@ import path from '../service/pathService';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
+import './MapComponent.css';
+
 class MapComponent extends Form {
     state = {
         data: {
@@ -30,12 +32,22 @@ class MapComponent extends Form {
             destination: new Array()
         },
         direction: [[]],
+        mapStyle: "mapbox://styles/mapbox/satellite-streets-v12", // default style
         errors: {}
     }
 
     setViewState(viewState) {
         this.setState({ viewState });
     }
+
+    handleStyleChange = (e) => {
+        const selectedStyle = e.target.value;
+        const styles = {
+            Satellite: "mapbox://styles/mapbox/satellite-streets-v12",
+            Street: "mapbox://styles/mapbox/streets-v12"
+        };
+        this.setState({ mapStyle: styles[selectedStyle] });
+    };
 
     schema = {
         source: Joi.string().label("Source"),
@@ -60,12 +72,20 @@ class MapComponent extends Form {
         return (
             <React.Fragment>
                 <div id="container">
-                    <div id="search">
+                    <div id="search" className='seach-bar'>
                         <form className="mt-3 mx-3" onSubmit={this.handleSubmit}>
                             {this.renderInput("source", "Search Starting Point...")}
                             {this.renderInput("destination", "Search Destination...")}
                             {this.renderButton("Get Direction")}
                         </form>
+                    </div>
+
+                    <div className="map-style-toggle">
+                        <label htmlFor="style">Map View: </label>
+                        <select id="style" onChange={this.handleStyleChange}>
+                            <option value="Satellite">Satellite</option>
+                            <option value="Street">Street</option>
+                        </select>
                     </div>
 
                     <div id="map">
@@ -74,7 +94,7 @@ class MapComponent extends Form {
                             mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                             onMove={vs => this.setViewState(vs.viewState)}
                             style={{ width: '100vw', height: '100vh' }}
-                            mapStyle="mapbox://styles/mapbox/streets-v9">
+                            mapStyle={this.state.mapStyle}>
 
                             {coordinates[source] && coordinates[destination] &&
                                 <Source type="geojson" data={data}>
