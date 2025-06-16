@@ -44,7 +44,7 @@ class MapComponent extends Form {
         const selectedStyle = e.target.value;
         const styles = {
             Satellite: "mapbox://styles/mapbox/satellite-streets-v12",
-            Street: "mapbox://styles/mapbox/streets-v12"
+            Street: "mapbox://styles/mapbox/outdoors-v12"
         };
         this.setState({ mapStyle: styles[selectedStyle] });
     };
