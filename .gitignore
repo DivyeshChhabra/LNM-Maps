@@ -30,6 +30,7 @@ LNM Roads
 # local env files
 map-env/
 lnm-maps/.env
+.env
 
 # Python cache files
 __pycache__/

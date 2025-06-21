@@ -10,11 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
+import os
+import environ
+from dotenv import load_dotenv
 import mongoengine
+from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv()
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -84,8 +91,9 @@ WSGI_APPLICATION = "NavicMap.wsgi.application"
 #         'NAME': 'NavicMap'
 #     }
 # }
+mongo_connection_host = os.getenv('MONGO_CONNECTION_STRING')
 mongoengine.connect(
-    db="NavicMap", host="mongodb://localhost:27017/", username="", password=""
+    db="NavicMap", host=mongo_connection_host, username="", password=""
 )
 
 
